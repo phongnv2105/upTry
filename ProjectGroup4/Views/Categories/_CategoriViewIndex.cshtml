@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<Project.Models.DataMapper.Category>
+
+@foreach (var item in Model.Where(x => x.ShowHome == true).OrderBy(x => x.DisplayNo).Take(3))
+{
+    <img class="img-responsive" src="@item.FeatureImg" alt="" />
+    <figcaption>
+        <h2>@item.Title</h2>
+        <p>@item.Description</p>
+    </figcaption>
+}
+@section scripts{
+
+    <!--Slider-Starts-Here-->
+    <script src="/content/js/responsiveslides.min.js"></script>
+    <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+                // Slideshow 4
+                $("#slider4").responsiveSlides({
+                    auto: true,
+                    pager: true,
+                    nav: true,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                    },
+                    after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                    }
+                });
+
+            });
+    </script>
+    <!--End-slider-script-->
+
+}

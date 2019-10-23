@@ -1,0 +1,64 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "Login";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--start-breadcrumbs-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Account</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--account-starts-->
+<div class="account">
+    <div class="container">
+        <div class="account-top heading">
+            <h2>TÀI KHOẢN</h2>
+        </div>
+        <div class="account-main">
+            <div class="col-md-6 account-left">
+                <h3>Bạn đã có tài khoản</h3>
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="account-bottom">
+                        <input placeholder="Email" name="Email" type="text" tabindex="3" required>
+                        <input placeholder="Mật khẩu" name="Password" type="password" tabindex="4" required>
+                        <div class="address">
+                            <a class="forgot" href="#">Quên mật khẩu?</a>
+                            <input type="submit" value="Đăng Nhập" style="border-radius: 20px;">
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6 account-right account-left">
+                <h3>Bạn là người dùng mới? Tạo một tài khoản</h3>
+                <p>Bằng cách tạo tài khoản với cửa hàng của chúng tôi, bạn sẽ có thể chuyển qua quy trình thanh toán nhanh hơn, lưu trữ nhiều địa chỉ giao hàng, xem và theo dõi đơn hàng của bạn trong tài khoản của bạn và hơn thế nữa.</p>
+                <a href="@Url.Action("Register", "Accounts")" style="border-radius: 20px;">Tạo tài khoản</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--account-end-->
+@section scripts{
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--start-menu-->
+
+
+
+    <script>$(document).ready(function () { $(".memenu").memenu(); });</script>
+    <!--dropdown-->
+
+}
+

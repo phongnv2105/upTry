@@ -1,0 +1,122 @@
+﻿@using Project.Models.DataMapper;
+@using ProjectGroup4.Models;
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _customer = Session["cus"] as Customer;
+    var carts = Session["cart"] as List<ItemCart>;
+}
+
+<!--start-breadcrumbs-->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Register</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--end-breadcrumbs-->
+<!--register-starts-->
+<div class="register">
+    <div class="container">
+        <div class="register-top heading">
+            <h2>Payment Info</h2>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="register-main">
+                <div class="col-md-6 account-left">
+                    <h3>Thông tin người mua</h3>
+                    <p><b>Họ tên: </b><span class="info_name">@_customer.FullName </span></p>
+                    <p><b>Email: </b><span class="info_email">@_customer.Email</span></p>
+                    <p><b>SĐT: </b><span class="info_phone">@_customer.Phone</span></p>
+
+
+                    @using (Html.BeginForm())
+                    {
+                        <h3>Thông tin người nhận</h3>
+                        <label>
+                            <input type="checkbox" onclick="getInfo(this)" name="name" value="" />
+                            Người mua là người nhận
+                        </label>
+                        <input type="hidden" name="CustomerId" id="CustomerId" value="@_customer.CustomerId" />
+                        <input placeholder="FullName" name="FullName" id="FullName" type="text" tabindex="1" required>
+                        <input placeholder="Email" name="Email" id="Email" type="text" tabindex="2" required>
+                        <input placeholder="Phone" name="Phone" id="Phone" type="text" tabindex="3" required>
+                        <input placeholder="Add9ress" name="Address" id="Address" type="text" tabindex="3" required>
+                        <div class="address submit">
+                            <input type="submit" value="Submit">
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6 account-left">
+                    <table class="table">
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá Bán</th>
+                            <th style="width:125px">Giảm giá</th>
+                            <th>giá đã giảm</th>
+                        </tr>
+                        @{ double total = 0;
+                            double gg = 0;
+                        }
+                        @foreach (var item in carts)
+                        {
+                            gg = (item.Product.PriceOut) - ((item.Product.Discount * (item.Product.PriceOut)) / 100);
+
+                            total += (item.Quantity * gg);
+                        <tr>
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td>@String.Format("{0:#,##} VNĐ", item.Product.PriceOut)</td>
+                            <td>@item.Product.Discount%</td>
+                            <td>@String.Format("{0:#,##} VNĐ", gg)</td>
+                        </tr>
+                        }
+                        <tr>
+                            <th colspan="2">Tổng tiền</th>
+                            <th>@String.Format("{0:#,##} VNĐ", total)</th>
+
+                        </tr>
+                    </table>
+                    @*@Html.EditorFor(model => model.Password)*@
+                    @*<input placeholder="ZipCode" name="CodeId" id="CodeId" type="text" tabindex="4">*@
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+        }
+    </div>
+</div>
+<!--register-end-->
+@section scripts{
+    <script>
+        function getInfo(input) {
+            if ($(input).is(":checked")) {
+                // Lấy thông tin đưa vào form
+                $("#FullName").val($(".info_name").text());
+                $("#Email").val($(".info_email").text());
+                $("#Phone").val($(".info_phone").text());
+                //$("#Address").val($(".info_address").text());
+                console.log("Checked");
+            } else {
+                $("#FullName").val("");
+                $("#Email").val("");
+                $("#Phone").val("");
+                //$("#Address").val($("");
+                console.log("Uncheck");
+            }
+        }
+
+
+        $(function () {
+            //$("#CodeId")
+        })
+    </script>
+}
+
+}

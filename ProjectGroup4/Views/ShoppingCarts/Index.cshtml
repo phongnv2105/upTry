@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ProjectGroup4.Models.ItemCart>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="breadcrumbs-main">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Checkout</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="ckeckout">
+    <div class="container">
+        <div class="ckeck-top heading">
+            <h2>CHECKOUT</h2>
+        </div>
+        <div class="ckeckout-top">
+            <div class="cart-items">
+                <h3>My Shopping Bag (3)</h3>
+                <script>
+$(document).ready(function(c) {
+					$('.close1').on('click', function(c){
+						$('.cart-header').fadeOut('slow', function(c){
+							$('.cart-header').remove();
+						});
+						});
+					});
+                </script>
+                <script>
+$(document).ready(function(c) {
+					$('.close2').on('click', function(c){
+						$('.cart-header1').fadeOut('slow', function(c){
+							$('.cart-header1').remove();
+						});
+						});
+					});
+                </script>
+                <script>
+$(document).ready(function(c) {
+					$('.close3').on('click', function(c){
+						$('.cart-header2').fadeOut('slow', function(c){
+							$('.cart-header2').remove();
+						});
+						});
+					});
+                </script>
+
+                <div class="in-check">
+                    <ul class="unit">
+                        <li><span>Item</span></li>
+                        <li><span>Product Name</span></li>
+                        <li><span>Unit Price</span></li>
+                        <li><span>Quantity</span></li>
+                        <li> </li>
+                        <div class="clearfix"> </div>
+                    </ul>
+                    @foreach (var item in Model)
+                    {
+                        <ul class="cart-header">
+                            <div class="close1"> </div>
+                            <li class="ring-in">
+                                <a href="@Url.Action("ProductDetail","Products", new { id = item.Product.ProductId })"><img src="@item.Product.Images" class="img-responsive" alt=""></a>
+                            </li>
+                            <li>
+                                <span class="name">@item.Product.ProductName</span>
+                                <p>
+                                    @{
+                                        var _attrIds = item.Attributes;
+                                    }
+                                    @foreach (var attr in ViewBag.Attrs)
+                                    {
+                                        if (_attrIds.Any(x =>x== attr.AttributeId))
+                                        {
+                                            <b>@attr.Name</b>
+                                        }
+                                    }
+                                </p>
+                            </li>
+                            <li><span class="cost">$ @item.Product.PriceOut</span></li>
+                            <li><span><input class="form-control text-center" value="@item.Quantity" min="1" max="100" type="number" style="width: 100px"></span></li>
+                            <div class="clearfix"> </div>
+                        </ul>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <a href="@Url.Action("Payment")" class="btn btn-primary">Payment</a>
+    </div>
+</div>
+

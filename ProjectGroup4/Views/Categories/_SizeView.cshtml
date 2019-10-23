@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Project.Models.DataMapper.Size>
+
+
+@foreach (var item in Model)
+{
+<label class="checkbox">
+    <input type="checkbox" name="checkbox" class="filter_Size" value="@item.SizeId" id=@item.SizeId><i></i>@item.SizeName
+</label>
+}
+
+@*<label class="radio"><input type="radio" name="radio" checked=""><i></i>choice of Size</label>
+    <label class="radio"><input type="radio" name="radio"><i></i>XS(28 MM)</label>
+    <label class="radio"><input type="radio" name="radio"><i></i>S(32 MM)</label>
+
+
+    <label class="radio"><input type="radio" name="radio"><i></i>M(34 MM)</label>
+    <label class="radio"><input type="radio" name="radio"><i></i>L(36 MM)</label>
+    <label class="radio"><input type="radio" name="radio"><i></i>XL(38 MM)</label>*@

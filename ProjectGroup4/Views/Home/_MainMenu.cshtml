@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Project.Models.DataMapper.Category>
+
+@foreach (var item in Model.Where(x => x.ParentId == 0).OrderBy(x => x.DisplayNo))
+{
+    <li class="grid">
+        @*
+            Kiểm tra đường dẫn xem danh mục là tin tức hay sp.
+        *@
+        @{var url = item.Type == 0 ? Url.Action("Category", "Categories") : Url.Action("Blog", "Home"); }
+        <a href="@url">@item.CategoryName</a>
+        @if (Model.Any(x => x.ParentId == item.CategoryId))
+        {
+            @*
+
+                Load danh danh mục con(parentId!=0)
+            *@
+
+            <div class="mepanel">
+                <div class="row">
+                    <div class="col1 me-one">
+                        
+                        <ul>
+                            @foreach (var child in Model.Where(x => x.ParentId == item.CategoryId).OrderBy(x => x.DisplayNo))
+                            {
+                                var _url = child.Type == 0 ? Url.Action("Category", "Categories") : Url.Action("Blog", "Home");
+                                <li>
+                                    <a href="@_url"> @child.CategoryName</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </li>
+}
+@*<li class="grid">
+        <a href="#">Men</a>
+        <div class="mepanel">
+            <div class="row">
+                <div class="col1 me-one">
+                    <
+                    <ul>
+                        <li><a href="@Url.Action("Category","Categories")">New Arrivals</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Blazers</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Swem Wear</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Accessories</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Handbags</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">T-Shirts</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Watches</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">My Shopping Bag</a></li>
+                    </ul>
+                </div>
+
+                </div>
+            </div>
+
+    </li>
+    <li class="grid">
+        <a href="@Url.Action("Blog","Home")">Blog</a>
+    </li>
+
+    @foreach (var item in Model.Where(x=>x.ParentId==0 ))
+    {
+    <li class="grid">
+        @{
+            var url = item.Type == 0 ? Url.Action("Category", "Categories") : Url.Action("Blog", "Home");
+                }
+                <a href="@url">@item.CategoryName</a>
+    </li>
+    }
+    <li class="grid">
+        <a href="#">Men</a>
+        <div class="mepanel">
+            <div class="row">
+                <div class="col1 me-one">
+                    <
+                    <ul>
+                        <li><a href="@Url.Action("Category","Categories")">New Arrivals</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Blazers</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Swem Wear</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Accessories</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Handbags</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">T-Shirts</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">Watches</a></li>
+                        <li><a href="@Url.Action("Category","Categories")">My Shopping Bag</a></li>
+                    </ul>
+                </div>
+
+                </div>
+            </div>
+
+    </li>
+    <li class="grid">
+        <a href="@Url.Action("Blog","Home")">Blog</a>
+    </li>*@
