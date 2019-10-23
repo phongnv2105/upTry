@@ -1,0 +1,19 @@
+﻿- Product : Add thiếu ProductAtributes
+
+- Order Manager: 
++ nếu hủy gửi mail thông báo hết hàng.
++ nếu duyệt + giao hàng gửi mail thông báo đang giao hàng
+
+
+- Order History: 
+- customer history, cusInformation
+
+
+thêm ảnh cho customer
+
+
+- Tìm kiếm Sản Phẩm:
+
+
+-update giỏ hàng.
+ kiểm tra số lượng sản phẩm
